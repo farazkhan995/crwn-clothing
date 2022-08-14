@@ -1,13 +1,12 @@
 body {
     margin: 0;
-    font-family: open-sans, sans-serif;
+    /* font-family: open-sans, sans-serif; */
+    font-family: 'Open Sans Condensed', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     padding: 20px 60px;
 
   }
-
-
   a {
     text-decoration: none;
     color: black;
