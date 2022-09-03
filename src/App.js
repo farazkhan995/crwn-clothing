@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Homepage from "./pages/homepage/homepage.component.jsx";
 import ShopPage from "./pages/shop/shop.component";
 import Header from "./components/header/header.component";
@@ -28,6 +28,7 @@ class App extends React.Component {
         });
       }
       setCurrentUser(userAuth);
+
     });
   }
   componentWillUnmount() {
@@ -35,6 +36,7 @@ class App extends React.Component {
   }
 
   render() {
+
     return (
       <div>
         <Header />
@@ -42,17 +44,23 @@ class App extends React.Component {
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/shop" element={<ShopPage />} />
-          <Route path="/signin" element={<SignInAndSignUp />} />
+          <Route path="/signin" element={this.props.currentUser ? (<Navigate replace to='/' />) : (<SignInAndSignUp />)} />
         </Routes>
       </div>
     );
   }
 }
+
+
+
 const mapDispatchToProps = dispatch => (
   {
     setCurrentUser: user => dispatch(setCurrentUser(user))
   }
 );
+const mapStateToProps = ({ user }) => ({
+  currentUser: user.currentUser
+});
 
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
